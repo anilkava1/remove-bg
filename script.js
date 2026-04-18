@@ -24,7 +24,7 @@ imageInput.addEventListener('change', async (e) => {
 
     try {
         // Is line ko check karo aur replace karo:
-         const response = await fetch('https://remove-bg-api-v1.onrender.com/remove-bg', {
+        const response = await fetch('https://remove-bg-api-v1.onrender.com/remove-bg', {
         method: 'POST',
         body: formData
     });
