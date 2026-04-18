@@ -6,20 +6,21 @@ const processingTimer = document.getElementById('processingTimer');
 const finalContent = document.getElementById('finalContent');
 const dlFree = document.getElementById('dlFree');
 
-let finalUrl = "";
+let blobUrl = "";
 
 imageInput.addEventListener('change', async (e) => {
     const file = e.target.files[0];
     if (!file) return;
 
-    // 1. UI Reset & Scroll to Box
+    // Reset UI
     resultArea.style.display = 'block';
-    finalContent.style.visibility = 'hidden';
-    finalContent.style.height = '0';
+    finalContent.style.display = 'none';
     processingTimer.style.display = 'block';
+    
+    // Auto Scroll to Timer
     resultArea.scrollIntoView({ behavior: 'smooth', block: 'center' });
 
-    // 2. Call API Immediately
+    // Call API
     const formData = new FormData();
     formData.append('file', file);
 
@@ -29,39 +30,33 @@ imageInput.addEventListener('change', async (e) => {
             body: formData
         });
         const blob = await res.blob();
-        finalUrl = URL.createObjectURL(blob);
-        resultImg.src = finalUrl;
+        blobUrl = URL.createObjectURL(blob);
+        resultImg.src = blobUrl;
 
-        // 3. Start 5s Countdown (Even if API is fast, for UX)
-        let timeLeft = 5;
-        const interval = setInterval(() => {
-            timeLeft--;
-            timerText.innerText = timeLeft;
-            if (timeLeft <= 0) {
-                clearInterval(interval);
-                showResult();
+        // Start 5s Timer
+        let seconds = 5;
+        timerText.innerText = seconds;
+        const countdown = setInterval(() => {
+            seconds--;
+            timerText.innerText = seconds;
+            if (seconds <= 0) {
+                clearInterval(countdown);
+                // Show Result and Scroll Again
+                processingTimer.style.display = 'none';
+                finalContent.style.display = 'block';
+                resultArea.scrollIntoView({ behavior: 'smooth', block: 'center' });
             }
         }, 1000);
 
     } catch (err) {
-        alert("Server error, please try again.");
+        alert("Server busy, try again.");
         resultArea.style.display = 'none';
     }
 });
 
-function showResult() {
-    processingTimer.style.display = 'none';
-    finalContent.style.visibility = 'visible';
-    finalContent.style.height = 'auto';
-    // Final Auto-Scroll
-    resultArea.scrollIntoView({ behavior: 'smooth', block: 'center' });
-}
-
-// Download with Timer logic
 dlFree.addEventListener('click', () => {
-    // Direct download since we already showed timer once
-    const link = document.createElement('a');
-    link.href = finalUrl;
-    link.download = "AK-HD-Image.png";
-    link.click();
+    const a = document.createElement('a');
+    a.href = blobUrl;
+    a.download = "AK-HD-Result.png";
+    a.click();
 });
