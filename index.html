@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Background Remover | Fast & Professional</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="ad-slot top-ad">
+        <p>ADVERTISEMENT - TOP BANNER</p>
+    </div>
+
+    <div class="main-layout">
+        <div class="content-area">
+            <div class="app-card">
+                <h1>Remove Background <span class="ai-tag">AI</span></h1>
+                
+                <div class="upload-box" id="dropZone">
+                    <input type="file" id="imageInput" accept="image/*" hidden>
+                    <label for="imageInput" class="upload-btn">
+                        <div class="icon">📤</div>
+                        <p>Upload Image or Drag & Drop</p>
+                    </label>
+                </div>
+
+                <div id="adOverlay" class="overlay">
+                    <div class="popup">
+                        <h3>Processing Image...</h3>
+                        <div id="countdown">5</div>
+                        <div class="popup-ad">
+                            <p>SPONSORED AD</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="resultArea" style="display: none;">
+                    <div class="image-container">
+                        <img id="resultImg" src="" alt="Result">
+                        <div class="scan-bar"></div>
+                    </div>
+                    
+                    <div class="actions">
+                        <button class="dl-btn free" id="dlFree">Download 1080p (Free)</button>
+                        <button class="dl-btn premium locked" id="dl4K">Download 4K (Locked 🔒)</button>
+                    </div>
+                    
+                    <p class="premium-note">4K Download is coming soon with Razorpay!</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="ad-slot side-ad">
+            <p>ADVERTISEMENT<br>SIDEBAR</p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

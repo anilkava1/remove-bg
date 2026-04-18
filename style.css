@@ -1,0 +1,31 @@
+:root { --primary: #007bff; --premium: #ffcc00; }
+body { font-family: 'Inter', sans-serif; background: #f8f9fa; margin: 0; padding: 20px; }
+
+.main-layout { display: flex; gap: 20px; max-width: 1200px; margin: auto; }
+.content-area { flex: 1; }
+
+/* Ads */
+.ad-slot { background: #e9ecef; border: 1px solid #dee2e6; display: flex; align-items: center; justify-content: center; color: #6c757d; }
+.top-ad { height: 90px; margin-bottom: 20px; }
+.side-ad { width: 300px; height: 600px; }
+
+/* App UI */
+.app-card { background: white; border-radius: 16px; padding: 40px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); text-align: center; }
+.upload-box { border: 2px dashed var(--primary); border-radius: 12px; padding: 40px; cursor: pointer; }
+.ai-tag { background: var(--primary); color: white; padding: 2px 8px; border-radius: 4px; font-size: 0.8rem; }
+
+/* Animation */
+.image-container { position: relative; overflow: hidden; display: inline-block; border-radius: 8px; margin-top: 20px; }
+.scan-bar { position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.6), transparent); }
+.scanning .scan-bar { animation: scan 2s ease-in-out; }
+@keyframes scan { 0% { left: -100%; } 100% { left: 100%; } }
+
+/* Buttons */
+.dl-btn { padding: 12px 24px; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; margin: 5px; }
+.free { background: #28a745; color: white; }
+.premium { background: var(--premium); color: #333; opacity: 0.6; cursor: not-allowed; }
+
+/* Overlay Popup */
+.overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.85); display: none; align-items: center; justify-content: center; z-index: 99; }
+.popup { background: white; padding: 30px; border-radius: 12px; text-align: center; width: 350px; }
+#countdown { font-size: 48px; color: var(--primary); font-weight: bold; margin: 10px 0; }
