@@ -3,56 +3,76 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Background Remover | Fast & Professional</title>
+    <title>AK Background Tool | HD AI Remover</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
+
     <div class="ad-slot top-ad">
-        <p>ADVERTISEMENT - TOP BANNER</p>
-    </div>
+        <p>ADVERTISEMENT</p>
+        </div>
 
-    <div class="main-layout">
-        <div class="content-area">
-            <div class="app-card">
-                <h1>Remove Background <span class="ai-tag">AI</span></h1>
-                
-                <div class="upload-box" id="dropZone">
-                    <input type="file" id="imageInput" accept="image/*" hidden>
-                    <label for="imageInput" class="upload-btn">
-                        <div class="icon">📤</div>
-                        <p>Upload Image or Drag & Drop</p>
-                    </label>
+    <div class="main-wrapper">
+        <div class="ad-slot side-ad left">AD</div>
+
+        <div class="container">
+            <header>
+                <div class="logo">AK<span>Tool</span></div>
+                <nav>
+                    <span>Fast. Professional. HD.</span>
+                </nav>
+            </header>
+
+            <section class="hero-section">
+                <div class="hero-text">
+                    <h1>Remove Image <br><span>Background</span> in 5s</h1>
+                    <p>High-quality AI background removal for your photos. 100% automatic and free.</p>
+                    
+                    <div class="upload-box">
+                        <input type="file" id="imageInput" accept="image/*" hidden>
+                        <button class="upload-btn" onclick="document.getElementById('imageInput').click()">
+                            <i class="fas fa-cloud-upload-alt"></i> Upload Image
+                        </button>
+                    </div>
                 </div>
 
-                <div id="adOverlay" class="overlay">
-                    <div class="popup">
-                        <h3>Processing Image...</h3>
-                        <div id="countdown">5</div>
-                        <div class="popup-ad">
-                            <p>SPONSORED AD</p>
-                        </div>
+                <div class="hero-visual">
+                    <div class="animation-box">
+                        <div class="bg-layer"></div>
+                        <div class="subject-layer"></div>
+                        <div class="scanner-line"></div>
                     </div>
                 </div>
+            </section>
 
-                <div id="resultArea" style="display: none;">
-                    <div class="image-container">
-                        <img id="resultImg" src="" alt="Result">
-                        <div class="scan-bar"></div>
-                    </div>
-                    
-                    <div class="actions">
-                        <button class="dl-btn free" id="dlFree">Download 1080p (Free)</button>
-                        <button class="dl-btn premium locked" id="dl4K">Download 4K (Locked 🔒)</button>
-                    </div>
-                    
-                    <p class="premium-note">4K Download is coming soon with Razorpay!</p>
+            <div id="resultArea" class="result-area" style="display:none;">
+                <h2>Your HD Result</h2>
+                <div class="image-container">
+                    <img id="resultImg" src="" alt="Result">
+                </div>
+                <button id="dlFree" class="download-btn">Download HD Image</button>
+            </div>
+
+            <div id="adOverlay" class="overlay" style="display:none;">
+                <div class="ad-card">
+                    <h3>Processing your HD Image...</h3>
+                    <p>Wait <span id="countdown">5</span> seconds</p>
+                    <div class="loader"></div>
                 </div>
             </div>
+
+            <footer>
+                <p><strong>AK Background Tool</strong> - 100% HD Quality</p>
+                <p>© 2026 Anil Kava | Built with AI Power</p>
+            </footer>
         </div>
 
-        <div class="ad-slot side-ad">
-            <p>ADVERTISEMENT<br>SIDEBAR</p>
-        </div>
+        <div class="ad-slot side-ad right">AD</div>
+    </div>
+
+    <div class="ad-slot bottom-ad">
+        <p>ADVERTISEMENT</p>
     </div>
 
     <script src="script.js"></script>
