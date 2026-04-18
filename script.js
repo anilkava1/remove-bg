@@ -1,79 +1,67 @@
 const imageInput = document.getElementById('imageInput');
 const resultArea = document.getElementById('resultArea');
 const resultImg = document.getElementById('resultImg');
-const adOverlay = document.getElementById('adOverlay');
-const countdown = document.getElementById('countdown');
+const timerText = document.getElementById('timerText');
+const processingTimer = document.getElementById('processingTimer');
+const finalContent = document.getElementById('finalContent');
 const dlFree = document.getElementById('dlFree');
 
-let finalBlobUrl = "";
+let finalUrl = "";
 
-// 1. Upload Logic
 imageInput.addEventListener('change', async (e) => {
     const file = e.target.files[0];
     if (!file) return;
 
-    // Show 5s Timer Ad before processing
-    adOverlay.style.display = 'flex';
-    runTimer(5, async () => {
-        const formData = new FormData();
-        formData.append('file', file);
+    // 1. UI Reset & Scroll to Box
+    resultArea.style.display = 'block';
+    finalContent.style.visibility = 'hidden';
+    finalContent.style.height = '0';
+    processingTimer.style.display = 'block';
+    resultArea.scrollIntoView({ behavior: 'smooth', block: 'center' });
 
-        try {
-            const res = await fetch('https://anilkava-remove-bg-api.hf.space/remove-bg', {
-                method: 'POST',
-                body: formData
-            });
+    // 2. Call API Immediately
+    const formData = new FormData();
+    formData.append('file', file);
 
-            if (!res.ok) throw new Error("API Error");
+    try {
+        const res = await fetch('https://anilkava-remove-bg-api.hf.space/remove-bg', {
+            method: 'POST',
+            body: formData
+        });
+        const blob = await res.blob();
+        finalUrl = URL.createObjectURL(blob);
+        resultImg.src = finalUrl;
 
-            const blob = await res.blob();
-            finalBlobUrl = URL.createObjectURL(blob);
+        // 3. Start 5s Countdown (Even if API is fast, for UX)
+        let timeLeft = 5;
+        const interval = setInterval(() => {
+            timeLeft--;
+            timerText.innerText = timeLeft;
+            if (timeLeft <= 0) {
+                clearInterval(interval);
+                showResult();
+            }
+        }, 1000);
 
-            // Hide Ad and Show Result
-            adOverlay.style.display = 'none';
-            resultImg.src = finalBlobUrl;
-            resultArea.style.display = 'block';
-
-            // AUTO SCROLL TO RESULT
-            setTimeout(() => {
-                resultArea.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            }, 500);
-
-        } catch (err) {
-            alert("Server is waking up. Please try again in 10 seconds.");
-            adOverlay.style.display = 'none';
-        }
-    });
+    } catch (err) {
+        alert("Server error, please try again.");
+        resultArea.style.display = 'none';
+    }
 });
 
-// 2. Download Logic with 5s Timer Ad
-dlFree.addEventListener('click', () => {
-    if (!finalBlobUrl) return;
-
-    adOverlay.style.display = 'flex';
-    runTimer(5, () => {
-        adOverlay.style.display = 'none';
-        const link = document.createElement('a');
-        link.href = finalBlobUrl;
-        link.download = "AK-HD-Removed.png";
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-    });
-});
-
-// Helper Function: Timer Logic
-function runTimer(seconds, callback) {
-    let timeLeft = seconds;
-    countdown.innerText = timeLeft;
-    
-    const timerId = setInterval(() => {
-        timeLeft--;
-        countdown.innerText = timeLeft;
-        
-        if (timeLeft <= 0) {
-            clearInterval(timerId);
-            callback();
-        }
-    }, 1000);
+function showResult() {
+    processingTimer.style.display = 'none';
+    finalContent.style.visibility = 'visible';
+    finalContent.style.height = 'auto';
+    // Final Auto-Scroll
+    resultArea.scrollIntoView({ behavior: 'smooth', block: 'center' });
 }
+
+// Download with Timer logic
+dlFree.addEventListener('click', () => {
+    // Direct download since we already showed timer once
+    const link = document.createElement('a');
+    link.href = finalUrl;
+    link.download = "AK-HD-Image.png";
+    link.click();
+});
