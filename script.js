@@ -5,68 +5,74 @@ const adOverlay = document.getElementById('adOverlay');
 const countdown = document.getElementById('countdown');
 const dlFree = document.getElementById('dlFree');
 
-let resultUrl = ""; // Global variable for download
+let finalBlobUrl = "";
 
+// 1. Upload Logic
 imageInput.addEventListener('change', async (e) => {
     const file = e.target.files[0];
     if (!file) return;
 
-    // 1. Show Ad & Start Initial Timer
+    // Show 5s Timer Ad before processing
     adOverlay.style.display = 'flex';
-    startTimer(5, async () => {
-        // 2. Call API after 5s
+    runTimer(5, async () => {
         const formData = new FormData();
         formData.append('file', file);
 
         try {
-            const response = await fetch('https://anilkava-remove-bg-api.hf.space/remove-bg', {
+            const res = await fetch('https://anilkava-remove-bg-api.hf.space/remove-bg', {
                 method: 'POST',
                 body: formData
             });
 
-            const blob = await response.blob();
-            resultUrl = URL.createObjectURL(blob);
+            if (!res.ok) throw new Error("API Error");
 
-            // 3. Hide Overlay & Show Result
+            const blob = await res.blob();
+            finalBlobUrl = URL.createObjectURL(blob);
+
+            // Hide Ad and Show Result
             adOverlay.style.display = 'none';
+            resultImg.src = finalBlobUrl;
             resultArea.style.display = 'block';
-            resultImg.src = resultUrl;
 
-            // 4. AUTO SCROLL TO RESULT (Khatarnak smooth scroll)
+            // AUTO SCROLL TO RESULT
             setTimeout(() => {
                 resultArea.scrollIntoView({ behavior: 'smooth', block: 'center' });
             }, 500);
 
         } catch (err) {
-            alert("Server Error! Trying to wake up...");
+            alert("Server is waking up. Please try again in 10 seconds.");
             adOverlay.style.display = 'none';
         }
     });
 });
 
-// 5. Download Button with 5s Ad
+// 2. Download Logic with 5s Timer Ad
 dlFree.addEventListener('click', () => {
+    if (!finalBlobUrl) return;
+
     adOverlay.style.display = 'flex';
-    startTimer(5, () => {
-        const a = document.createElement('a');
-        a.href = resultUrl;
-        a.download = "AK_HD_Removed.png";
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
+    runTimer(5, () => {
         adOverlay.style.display = 'none';
+        const link = document.createElement('a');
+        link.href = finalBlobUrl;
+        link.download = "AK-HD-Removed.png";
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
     });
 });
 
-// Helper Function for Timer
-function startTimer(seconds, callback) {
-    let time = seconds;
-    countdown.innerText = time;
-    const interval = setInterval(() => {
-        time--;
-        countdown.innerText = time;
-        if (time <= 0) {
-            clearInterval(interval);
+// Helper Function: Timer Logic
+function runTimer(seconds, callback) {
+    let timeLeft = seconds;
+    countdown.innerText = timeLeft;
+    
+    const timerId = setInterval(() => {
+        timeLeft--;
+        countdown.innerText = timeLeft;
+        
+        if (timeLeft <= 0) {
+            clearInterval(timerId);
             callback();
         }
     }, 1000);

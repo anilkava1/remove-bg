@@ -12,20 +12,19 @@
     <nav class="navbar">
         <div class="nav-container">
             <div class="nav-logo">
-                <img src="logo.png" alt="AK Logo" onerror="this.style.display='none'">
                 <span>remove<span>bg</span></span>
             </div>
             <ul class="nav-links">
                 <li><a href="#">Uploads</a></li>
                 <li><a href="mailto:anilkava263@gmail.com" class="api-link">API (Contact for API)</a></li>
-                <li><a href="#">Pricing</a></li>
             </ul>
             <div class="nav-auth">
-                <a href="#" class="login">Log in</a>
-                <a href="#" class="signup">Sign up</a>
+                <a href="mailto:anilkava263@gmail.com" class="signup">Contact Us</a>
             </div>
         </div>
     </nav>
+
+    <div class="ad-banner-top">ADVERTISEMENT</div>
 
     <main class="hero">
         <div class="hero-container">
@@ -42,35 +41,40 @@
                 <div class="upload-card">
                     <input type="file" id="imageInput" accept="image/*" hidden>
                     <div class="upload-inner" onclick="document.getElementById('imageInput').click()">
-                        <button class="blue-btn">Upload Image</button>
+                        <div class="blue-btn">Upload Image</div>
                         <p class="drop-text">or drop a file,</p>
                         <p class="small-text">paste image or <u>URL</u></p>
                     </div>
                 </div>
                 
                 <div id="resultArea" class="result-box" style="display:none;">
+                    <h2>✨ Your HD Result is Ready!</h2>
                     <div class="result-preview">
                         <img id="resultImg" src="" alt="Result">
                     </div>
                     <div class="action-btns">
-                        <button id="dlFree" class="dl-btn">Download</button>
-                        <button class="dl-btn hd">Download HD</button>
+                        <button id="dlFree" class="dl-btn">
+                            <i class="fas fa-download"></i> DOWNLOAD HD IMAGE
+                        </button>
                     </div>
                 </div>
             </div>
         </div>
     </main>
 
-    <div class="ad-banner bottom-ad">ADVERTISEMENT</div>
+    <div class="ad-banner-bottom">ADVERTISEMENT</div>
 
     <footer>
-        <p>AK Background Tool with HD image | © 2026 Anil Kava</p>
+        <p><strong>AK Background Tool with HD image</strong></p>
+        <p>© 2026 Anil Kava | anilkava263@gmail.com</p>
     </footer>
 
     <div id="adOverlay" class="overlay" style="display:none;">
         <div class="ad-card">
-            <h3>Processing AI...</h3>
+            <div class="loader"></div>
+            <h3>Processing HD AI...</h3>
             <p>Wait <span id="countdown">5</span> seconds</p>
+            <div class="ad-placeholder">Your Ad Here</div>
         </div>
     </div>
 
