@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AK Background Remover | HD</title>
+    <title>Remove Background - AK HD Tool</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
@@ -12,41 +12,39 @@
     <nav class="navbar">
         <div class="nav-container">
             <div class="nav-logo"><span>remove<span>bg</span></span></div>
-            <div class="nav-links">
-                <a href="javascript:void(0)" onclick="alert('Contact for API: anilkava263@gmail.com')" class="api-link">API</a>
-            </div>
+            <ul class="nav-links">
+                <li><a href="javascript:void(0)" onclick="alert('Contact for API: anilkava263@gmail.com')" class="api-link">API Contact</a></li>
+            </ul>
         </div>
     </nav>
 
-    <div class="ad-responsive">ADVERTISEMENT</div>
+    <div class="ad-responsive-top">ADVERTISEMENT</div>
 
-    <main class="hero">
-        <div class="hero-container">
-            <div class="hero-content">
+    <main class="hero-wrapper">
+        <div class="grid-container">
+            <div class="grid-left">
                 <div class="animation-box">
                     <div class="bg-layer"></div>
                     <div class="subject-layer"></div>
                     <div class="scanner"></div>
                 </div>
-                <div class="text-content">
+                <div class="hero-text">
                     <h1>Remove Image <br>Background</h1>
                     <p>100% Automatically and <span>Free</span></p>
                 </div>
             </div>
 
-            <div class="hero-actions">
-                <div class="upload-card">
+            <div class="grid-right">
+                <div class="upload-card" id="dropZone" onclick="document.getElementById('imageInput').click()">
                     <input type="file" id="imageInput" accept="image/*" hidden>
-                    <div class="upload-inner" onclick="document.getElementById('imageInput').click()">
-                        <div class="blue-btn">Upload Image</div>
-                        <p>or drop a file</p>
-                    </div>
+                    <div class="blue-btn">Upload Image</div>
+                    <p>or drop a file</p>
                 </div>
                 
                 <div id="resultArea" class="result-box" style="display:none;">
-                    <div id="processingTimer" class="timer-container">
-                        <div class="spinner"></div>
-                        <p>Generating PNG in <span id="timerText">5</span>s...</p>
+                    <div id="processingTimer" class="timer-ui">
+                        <div class="loader"></div>
+                        <p>AI generating HD PNG in <span id="timerText">5</span>s...</p>
                     </div>
                     
                     <div id="finalContent" style="display: none;">
@@ -60,12 +58,24 @@
         </div>
     </main>
 
-    <div class="ad-responsive">ADVERTISEMENT</div>
+    <div class="ad-responsive-bottom">ADVERTISEMENT</div>
 
     <footer class="footer">
-        <h3>AK Background Tool with HD image</h3>
-        <p>© 2026 Anil Kava | anilkava263@gmail.com</p>
+        <div class="footer-center">
+            <h3>AK Background Tool with 4K image</h3>
+            <div class="footer-divider"></div>
+            <p>© 2026 Anil Kava | All rights reserved</p>
+        </div>
     </footer>
+
+    <div id="downloadOverlay" class="overlay-ad" style="display:none;">
+        <div class="ad-popup-card">
+            <div class="loader-small"></div>
+            <h3>Preparing HD Download...</h3>
+            <p>Your download starts in <span id="dlTimerText">3</span>s</p>
+            <div class="ad-space-box">AD SLOT HERE</div>
+        </div>
+    </div>
 
     <script src="script.js"></script>
 </body>
