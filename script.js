@@ -23,7 +23,7 @@ imageInput.addEventListener('change', async (e) => {
     formData.append('file', file);
 
     try {
-        const response = await fetch('https://remove-bg-api-v1.onrender.com/remove-bg', {
+        const response = await fetch('https://remove-bg-api-7737.onrender.com/remove-bg', {
             method: 'POST',
             body: formData
         });
