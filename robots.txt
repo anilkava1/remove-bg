@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+
+
+# Sitemap ka full URL dena zaroori hai
+Sitemap: https://anilkava1.github.io/remove-bg/sitemap.xml
